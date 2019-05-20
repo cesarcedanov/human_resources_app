@@ -8,7 +8,7 @@ const Header = () => {
 
 
   return (
-    <Menu secondary>
+    <Menu >
       <Link to="/company">
         <Menu.Item 
           name="company"
@@ -39,6 +39,6 @@ const Header = () => {
       </Link>
     </Menu>
   );
-}
+};
 
 export default Header;

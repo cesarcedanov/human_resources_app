@@ -23,6 +23,6 @@ const App = () => {
       <h6>Human Resource App  0.1.0</h6>
     </div>
   );
-}
+};
 
 export default App;
