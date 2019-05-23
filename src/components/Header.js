@@ -1,44 +1,25 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Menu } from 'semantic-ui-react';
+import React from 'react';
+import { withRouter } from 'react-router-dom';
+import { Layout, Menu } from 'antd';
 
-const Header = () => {
-  // Declare a new state variable to handle the active Item
-  const [activeItem, setActiveItem] = useState('employee');
-
-
+ const Header = (props) => {
   return (
-    <Menu >
-      <Link to="/company">
-        <Menu.Item 
-          name="company"
-          onClick={() => setActiveItem("company")}
-          active={activeItem === "company"}
-        />
-      </Link>
-      <Link to="groups">
-        <Menu.Item 
-          name="groups"
-          onClick={() => setActiveItem("groups")}
-          active={activeItem === "groups"}
-        />
-      </Link>
-      <Link to="roles">
-        <Menu.Item 
-          name="roles"
-          onClick={() => setActiveItem("roles")}
-          active={activeItem === "roles"}
-        />
-      </Link>
-      <Link to="/employees">
-        <Menu.Item 
-          name="employees"
-          onClick={() => setActiveItem("employees")}
-          active={activeItem === "employees"}
-        />
-      </Link>
-    </Menu>
+
+    <Layout.Header style={{ position: 'fixed', zIndex: 1, width: '100%'}}>
+      <div className="logo" />
+      <Menu
+        theme="dark"
+        mode="horizontal"
+        defaultSelectedKeys={['1']}
+        style={{ lineHeight: '64px' }}
+      >
+        <Menu.Item key="1" onClick={() => props.history.push('/company')}>Company</Menu.Item>
+        <Menu.Item key="2" onClick={() => props.history.push('/groups')}>Groups</Menu.Item>
+        <Menu.Item key="3" onClick={() => props.history.push('/roles')}>Roles</Menu.Item>
+        <Menu.Item key="4" onClick={() => props.history.push('/employees')}>Employees</Menu.Item>
+      </Menu>
+    </Layout.Header>
   );
 };
 
-export default Header;
+export default withRouter(Header);
