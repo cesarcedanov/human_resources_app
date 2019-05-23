@@ -10,12 +10,19 @@
   "author": "Cesar Cedano V",
   "dependencies": {
     "antd": "^3.18.2",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.0",
+    "express-graphql": "^0.8.0",
+    "graphql": "^14.3.0",
+    "graphql-tag": "^2.10.1",
+    "mongoose": "^5.5.11",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.0",
     "react-scripts": "3.0.1"
   },
   "scripts": {
+    "dev": "nodemon index.js",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -35,5 +42,10 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-plugin-react": "^7.13.0",
+    "nodemon": "^1.19.0"
   }
 }
