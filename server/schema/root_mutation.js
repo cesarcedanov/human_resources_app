@@ -16,7 +16,6 @@ const RootMutation = new GraphQLObjectType({
     addCompany: {
       type: CompanyType,
       args: {    
-        id: { type: GraphQLID },
         name: { type: GraphQLString },
         description: { type: GraphQLString },
         founded: { type: GraphQLInt },
@@ -27,6 +26,28 @@ const RootMutation = new GraphQLObjectType({
       },
       resolve(parentValue, { name, email }) {
         return (new Company({ name, email })).save()
+      }
+    },
+    updateCompany: {
+      type: CompanyType,
+      args: {    
+        id: { type: GraphQLID },
+        name: { type: GraphQLString },
+        description: { type: GraphQLString },
+        founded: { type: GraphQLInt },
+        email: { type: GraphQLString },
+        phone: { type: GraphQLString },
+        instagram: { type: GraphQLString },
+        twitter: { type: GraphQLString }
+      },
+      resolve(parentValue, {id, name}) {
+        return Company.findOneAndUpdate(
+          {_id:id},
+          {name:name},
+          {new:true}
+        ).exec()
+        .then(response => response)
+        .catch(err => err)
       }
     }
   }
