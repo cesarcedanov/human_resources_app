@@ -15,7 +15,7 @@ const App = () => {
     <Layout>
       <BrowserRouter>
         <Header />
-        <Layout.Content style={{ padding: '50px', marginTop: 64 }}>
+        <Layout.Content style={{ background: 'white', padding: 50, marginTop: 64}}>
           <Switch>
             <Route path="/" exact component={CompanyInfo} />
             <Route path="/company" exact component={CompanyInfo} />

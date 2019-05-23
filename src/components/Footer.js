@@ -3,7 +3,7 @@ import { Layout } from 'antd';
 
 const Footer = () => {
   return (
-    <Layout.Footer style={{ textAlign: 'center' }}>Ant Design ©201p Created by Cesar Cedano V</Layout.Footer>
+    <Layout.Footer style= {{ background:'white', textAlign: 'center' }}>HumanResourceApp ©2019 Created by @cesarcedanov</Layout.Footer>
   );
 };
 
