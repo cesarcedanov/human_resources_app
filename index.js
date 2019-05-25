@@ -2,6 +2,28 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const path = require("path");
+const mongoose = require("mongoose");
+const expressGraphql = require("express-graphql");
+
+const keys = require("./config/keys");
+require("./models");
+const schema = require("./schema/schema");
+
+mongoose.Promise = global.Promise;
+// Use the below opts to avoid deprecation warning
+mongooseOpts = {
+  useNewUrlParser: true,
+  useFindAndModify: false,
+  useCreateIndex: true
+};
+
+// Create a conection to mongoDB
+mongoose.connect(keys.mongoURI, mongooseOpts);
+
+// Add some events to the Mongoose Connection
+mongoose.connection
+  .once("open", () => console.log("Connected to MongoLab instance."))
+  .on("error", error => console.log(`Error connecting to MongoLab: ${error}`));
 
 // Create the Express server
 const app = express();
@@ -22,6 +44,15 @@ app.use(express.static(path.join(__dirname, "client/build")));
 app.get("/", function(req, res) {
   res.send("Human Resources API - Health Check");
 });
+
+// This endpoint will open an in-browser IDE for exploring GraphQL.
+app.use(
+  "/graphql",
+  expressGraphql({
+    schema,
+    graphiql: true
+  })
+);
 
 // This endpoint will "catch all" the requests that
 // doesn't match one above and send back client index.html
