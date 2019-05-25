@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
 const Company = new Schema({
@@ -9,7 +9,7 @@ const Company = new Schema({
     trim: true
   },
   description: {
-    type: String,
+    type: String
   },
   founded: {
     type: Number,
@@ -32,4 +32,4 @@ const Company = new Schema({
   }
 });
 
-mongoose.model('company', Company);
+mongoose.model("company", Company);

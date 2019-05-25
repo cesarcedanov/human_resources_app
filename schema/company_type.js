@@ -1,14 +1,9 @@
-const graphql = require('graphql');
+const graphql = require("graphql");
 
-const {
-  GraphQLObjectType,
-  GraphQLID,
-  GraphQLString,
-  GraphQLInt,
-} = graphql;
+const { GraphQLObjectType, GraphQLID, GraphQLString, GraphQLInt } = graphql;
 
 const CompanyType = new GraphQLObjectType({
-  name: 'CompanyType',
+  name: "CompanyType",
   fields: () => ({
     id: { type: GraphQLID },
     name: { type: GraphQLString },
@@ -17,7 +12,7 @@ const CompanyType = new GraphQLObjectType({
     email: { type: GraphQLString },
     phone: { type: GraphQLString },
     instagram: { type: GraphQLString },
-    twitter: { type: GraphQLString },
+    twitter: { type: GraphQLString }
   })
 });
 

@@ -1,21 +1,16 @@
-const graphql = require('graphql');
-const {
-  GraphQLObjectType,
-  GraphQLID,
-  GraphQLString,
-  GraphQLInt
-} = graphql
+const graphql = require("graphql");
+const { GraphQLObjectType, GraphQLID, GraphQLString, GraphQLInt } = graphql;
 
-const mongoose = require('mongoose');
-const Company = mongoose.model('company');
-const CompanyType = require('./company_type');
+const mongoose = require("mongoose");
+const Company = mongoose.model("company");
+const CompanyType = require("./company_type");
 
 const RootMutation = new GraphQLObjectType({
-  name: 'RootMutation',
+  name: "RootMutation",
   fields: {
     addCompany: {
       type: CompanyType,
-      args: {    
+      args: {
         name: { type: GraphQLString },
         description: { type: GraphQLString },
         founded: { type: GraphQLInt },
@@ -24,13 +19,13 @@ const RootMutation = new GraphQLObjectType({
         instagram: { type: GraphQLString },
         twitter: { type: GraphQLString }
       },
-      resolve(parentValue, { name, email }) {
-        return (new Company({ name, email })).save()
+      resolve(_, args) {
+        return new Company(args).save();
       }
     },
     updateCompany: {
       type: CompanyType,
-      args: {    
+      args: {
         id: { type: GraphQLID },
         name: { type: GraphQLString },
         description: { type: GraphQLString },
@@ -40,14 +35,12 @@ const RootMutation = new GraphQLObjectType({
         instagram: { type: GraphQLString },
         twitter: { type: GraphQLString }
       },
-      resolve(parentValue, {id, name}) {
-        return Company.findOneAndUpdate(
-          {_id:id},
-          {name:name},
-          {new:true}
-        ).exec()
-        .then(response => response)
-        .catch(err => err)
+      resolve(_, args) {
+        const { id } = args;
+        return Company.findOneAndUpdate({ _id: id }, args, { new: true })
+          .exec()
+          .then(response => response)
+          .catch(err => err);
       }
     }
   }
