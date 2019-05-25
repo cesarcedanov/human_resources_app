@@ -53,7 +53,7 @@ class CompanyList extends React.Component {
   };
 
   openGraphiQL = () => {
-    window.open("http://localhost:5000/graphql", "_blank");
+    window.open("/graphql", "_blank");
   };
 
   componentDidMount() {
