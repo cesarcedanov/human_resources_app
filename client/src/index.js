@@ -1,11 +1,7 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
 
-const App = () => {
-  return <div> Human Resources App</div>;
-};
+import App from "./components/App";
 
-ReactDOM.render(
-  <App />,
-  document.querySelector('#root')
-);
+ReactDOM.render(<App />, document.querySelector("#root"));
