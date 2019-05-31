@@ -74,7 +74,7 @@ class CompanyList extends React.Component {
           icon="plus"
           size="default"
         >
-          Add Compnay
+          Add Company
         </Button>
         <List
           grid={{
