@@ -4,7 +4,9 @@
   "private": true,
   "dependencies": {
     "antd": "^3.19.1",
+    "apollo-cache-inmemory": "^1.6.0",
     "apollo-client": "^2.6.0",
+    "apollo-link-http": "^1.5.14",
     "graphql-tag": "^2.10.1",
     "react": "^16.8.6",
     "react-apollo": "^2.5.6",
