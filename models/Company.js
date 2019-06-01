@@ -12,8 +12,7 @@ const Company = new Schema({
     type: String
   },
   founded: {
-    type: Number,
-    default: 9999
+    type: String
   },
   email: {
     type: String,
