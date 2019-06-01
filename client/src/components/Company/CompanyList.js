@@ -7,7 +7,6 @@ import CompanyCreate from "./CompanyCreate";
 import fetchCompanies from "../../queries/fetchCompanies";
 
 class CompanyList extends React.Component {
-  //Modal Button
   state = {
     visible: false
   };
@@ -122,7 +121,6 @@ class CompanyList extends React.Component {
                 <Typography.Paragraph ellipsis={{ rows: 3, expandable: true }}>
                   {company.description}
                 </Typography.Paragraph>
-                {company.founded}
               </Card>
             </List.Item>
           )}
