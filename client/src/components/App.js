@@ -6,7 +6,8 @@ import Header from "./Header";
 import Footer from "./Footer";
 
 import Home from "./Home";
-import CompanyList from "../components/Company/CompanyList";
+import CompanyList from "./Company/CompanyList";
+import CompanyDetails from "./Company/CompanyDetails";
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
           <div style={{ background: "#fff", padding: 25, minHeight: 280 }}>
             <Switch>
               <Route path="/" exact component={Home} />
+              <Route path="/company/:id" component={CompanyDetails} />
               <Route path="/company" exact component={CompanyList} />
             </Switch>
           </div>

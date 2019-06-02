@@ -1,6 +1,7 @@
 import React from "react";
+import { withRouter } from "react-router-dom";
 import gql from "graphql-tag";
-import { graphql } from "react-apollo";
+import { compose, graphql } from "react-apollo";
 import { List, Card, Icon, Button, Row, Col, Typography } from "antd";
 
 import CompanyCreate from "./CompanyCreate";
@@ -25,7 +26,6 @@ class CompanyList extends React.Component {
       if (err) {
         return;
       }
-
       this.props.mutate({
         variables: {
           ...formValues,
@@ -51,6 +51,10 @@ class CompanyList extends React.Component {
         }
       />
     );
+  };
+
+  openCompanyDetails = companyId => {
+    this.props.history.push(`/company/${companyId}`);
   };
 
   renderActions = company => {
@@ -93,28 +97,26 @@ class CompanyList extends React.Component {
           grid={{
             gutter: 16,
             xs: 1,
-            sm: 2,
-            md: 4,
-            lg: 4,
-            xl: 4,
+            sm: 1,
+            md: 2,
+            lg: 3,
+            xl: 3,
             xxl: 4
           }}
           dataSource={this.props.data.companies}
           renderItem={company => (
-            <List.Item>
+            <List.Item id={company.id}>
               <Card
                 hoverable
                 title={
-                  <div>
-                    <Row>
-                      <Col span={16}>{company.name}</Col>
-                      <Col span={6} offset={2}>
-                        <Typography.Text type="secondary">
-                          {company.founded}
-                        </Typography.Text>
-                      </Col>
-                    </Row>
-                  </div>
+                  <Row onClick={() => this.openCompanyDetails(company.id)}>
+                    <Col span={16}>{company.name}</Col>
+                    <Col span={6} offset={2}>
+                      <Typography.Text type="secondary">
+                        {company.founded}
+                      </Typography.Text>
+                    </Col>
+                  </Row>
                 }
                 actions={this.renderActions(company)}
               >
@@ -155,4 +157,7 @@ const mutation = gql`
   }
 `;
 
-export default graphql(fetchCompanies)(graphql(mutation)(CompanyList));
+export default compose(
+  graphql(fetchCompanies),
+  graphql(mutation)
+)(withRouter(CompanyList));
