@@ -2,7 +2,7 @@ import React from "react";
 import gql from "graphql-tag";
 import { compose, graphql } from "react-apollo";
 
-import { Descriptions } from "antd";
+import { Descriptions, Divider } from "antd";
 
 class CompanyDetails extends React.Component {
   render() {
@@ -21,20 +21,16 @@ class CompanyDetails extends React.Component {
     } = company;
     return (
       <div>
-        <Descriptions
-          title="Company Details"
-          column={{ xxl: 2, xl: 2, lg: 2, md: 2, sm: 1, xs: 1 }}
-        >
+        <Divider orientation="left">Company Details</Divider>
+        <Descriptions column={{ xxl: 2, xl: 2, lg: 2, md: 2, sm: 1, xs: 1 }}>
           <Descriptions.Item label="Company name">{name}</Descriptions.Item>
           <Descriptions.Item label="Founded">{founded}</Descriptions.Item>
           <Descriptions.Item label="Description" span={2}>
             {description}
           </Descriptions.Item>
         </Descriptions>
-        <Descriptions
-          title="Contacts"
-          column={{ xxl: 2, xl: 2, lg: 2, md: 2, sm: 1, xs: 1 }}
-        >
+        <Divider orientation="left">Contacts</Divider>
+        <Descriptions column={{ xxl: 2, xl: 2, lg: 2, md: 2, sm: 1, xs: 1 }}>
           <Descriptions.Item label="Email">{email}</Descriptions.Item>
           <Descriptions.Item label="Phone">{phone}</Descriptions.Item>
           <Descriptions.Item label="Instagram">
@@ -56,6 +52,8 @@ class CompanyDetails extends React.Component {
             </a>
           </Descriptions.Item>
         </Descriptions>
+
+        <Divider orientation="left" />
       </div>
     );
   }
@@ -68,6 +66,8 @@ const _FETCH_COMPANY = gql`
       name
       description
       founded
+      email
+      phone
       instagram
       twitter
     }
