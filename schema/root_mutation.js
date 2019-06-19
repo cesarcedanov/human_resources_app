@@ -42,6 +42,19 @@ const RootMutation = new GraphQLObjectType({
           .then(response => response)
           .catch(err => err);
       }
+    },
+    deleteCompany: {
+      type: CompanyType,
+      args: {
+        id: { type: GraphQLID }
+      },
+      resolve(_, args) {
+        const { id } = args;
+        return Company.findByIdAndDelete(id)
+          .exec()
+          .then(response => response)
+          .catch(err => err);
+      }
     }
   }
 });
