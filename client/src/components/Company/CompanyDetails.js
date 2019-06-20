@@ -1,16 +1,48 @@
 import React from "react";
 import gql from "graphql-tag";
 import { compose, graphql } from "react-apollo";
+import { withRouter } from "react-router-dom";
+import fetchCompanies from "../../queries/fetchCompanies";
 
-import { Descriptions, Divider } from "antd";
+import { Descriptions, Divider, Row, Button, Modal } from "antd";
+
+const confirm = Modal.confirm;
 
 class CompanyDetails extends React.Component {
+  deleteCompany = id => {
+    this.props.mutate({
+      variables: {
+        id
+      },
+      refetchQueries: [{ query: fetchCompanies }]
+    });
+    this.goHome();
+  };
+
+  goHome = () => {
+    this.props.history.push("/company");
+  };
+
+  showDelete = (id, deleteCompany) => {
+    confirm({
+      title: "Do you want to delete these company?",
+      content: `Company Name: ${id}`,
+      onOk() {
+        console.log(`I should delete the following company: ${id}`);
+        deleteCompany(id);
+      },
+      onCancel() {
+        console.log("I wont delete it, chill ");
+      }
+    });
+  };
   render() {
     const { company } = this.props.data;
     if (!company) {
       return "";
     }
     const {
+      id,
       name,
       description,
       founded,
@@ -21,6 +53,16 @@ class CompanyDetails extends React.Component {
     } = company;
     return (
       <div>
+        <Row>
+          <Button
+            onClick={() => this.showDelete(id, this.deleteCompany)}
+            type="danger"
+            icon="delete"
+          >
+            Bankruptcy
+          </Button>
+        </Row>
+
         <Divider orientation="left">Company Details</Divider>
         <Descriptions column={{ xxl: 2, xl: 2, lg: 2, md: 2, sm: 1, xs: 1 }}>
           <Descriptions.Item label="Company name">{name}</Descriptions.Item>
@@ -73,6 +115,14 @@ const _FETCH_COMPANY = gql`
     }
   }
 `;
+
+const mutation = gql`
+  mutation DeleteCompany($id: ID) {
+    deleteCompany(id: $id) {
+      id
+    }
+  }
+`;
 export default compose(
   graphql(_FETCH_COMPANY, {
     options: props => {
@@ -80,5 +130,6 @@ export default compose(
         variables: { id: props.match.params.id }
       };
     }
-  })
-)(CompanyDetails);
+  }),
+  graphql(mutation)
+)(withRouter(CompanyDetails));
