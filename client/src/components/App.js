@@ -14,9 +14,7 @@ const App = () => {
     <Layout>
       <BrowserRouter>
         <Header />
-        <Layout.Content
-          style={{ background: "#fff", padding: 50, marginTop: 64 }}
-        >
+        <Layout.Content style={{ background: "#fff", marginTop: 64 }}>
           <div style={{ background: "#fff", padding: 25, minHeight: 280 }}>
             <Switch>
               <Route path="/" exact component={Home} />

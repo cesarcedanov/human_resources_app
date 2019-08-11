@@ -28,12 +28,9 @@ class CompanyDetails extends React.Component {
       title: "Do you want to delete these company?",
       content: `Company Name: ${id}`,
       onOk() {
-        console.log(`I should delete the following company: ${id}`);
         deleteCompany(id);
       },
-      onCancel() {
-        console.log("I wont delete it, chill ");
-      }
+      onCancel() {}
     });
   };
   render() {
